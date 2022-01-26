@@ -85,6 +85,17 @@
   // $all_options = get_option('tsml_types_in_use');
   // write_log($all_options);
 
+     // NEW SORT START
+     // Ted Price. 7 JAN 2022
+     // At request of Rich M, we sort by day -> time -> city
+     array_multisort(
+       array_column($meetings, 'day'),  SORT_ASC,
+       array_column($meetings, 'time'), SORT_ASC,
+       array_column($meetings, 'city'), SORT_ASC,
+       $meetings
+     );
+     // NEW SORT END
+
 	$mymeetings = array();
 	foreach ($meetings as $meeting) {
 
