@@ -178,8 +178,13 @@ function tsmp_create_pdf_table1(){
 	$page_width = get_option('tsmp_width');
 	$page_height = get_option('tsmp_height');
 	$region_new_page = get_option('tsmp_table_region_new_page');
-
-
+  
+	
+  if ($intro_text != "") {
+    // Adding current run date
+    $intro_text = str_replace("__date__", strftime("%m-%d-%Y"), $intro_text);
+  }
+	
 	$first_page_no = 1;
 
 	//config dimensions, in inches
@@ -370,7 +375,11 @@ function tsmp_create_pdf_columns($layout_type, $arg_font_size){
 	// ----------------------------------------------------------
 
 	//loop through pre-html
-	if($intro_text != ""){
+	if ($intro_text != "") {
+
+   // Adding current run date
+  $intro_text = str_replace("__date__", strftime("%m-%d-%Y"), $intro_text);
+
 		$html_array = explode($html_delimiter, $intro_text );
 		foreach ($html_array as $html_block) {
 			$html_block .= $html_delimiter; //put back what we striped out
